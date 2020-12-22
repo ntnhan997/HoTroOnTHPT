@@ -66,3 +66,40 @@
     /* identical to box height */
     color: #FFE040;
 }
+
+.contain {
+    width: 100%;
+    min-height: 500px;
+    display: flex;
+}
+
+.contain-left {
+    min-height: 500px;
+    flex: 1;
+}
+
+.contain-mid {
+    background-color: black;
+    min-height: 500px;
+    flex: 3;
+}
+
+.contain-right {
+    min-height: 500px;
+    flex: 1;
+}
+
+.footer {
+    position: absolute;
+    width: 100%;
+    height: 212px;
+    left: 0px;
+}
+
+.footer-bottom {
+    position: absolute;
+    width: 100%;
+    height: 157px;
+    left: 0px;
+    background: #2B3647;
+}

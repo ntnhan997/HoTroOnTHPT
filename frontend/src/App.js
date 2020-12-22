@@ -19,6 +19,15 @@ function App() {
         <div ><Link to="/dangnhap" className="btn-login">ĐĂNG NHẬP</Link></div>
         <div ><Link to="/dangky" className="btn-register">ĐĂNG KÝ</Link></div>
       </div>
+      <div className="contain">
+        <div className="contain-left">hello left</div>
+        <div className="contain-mid">hello mid</div>
+        <div className="contain-right">hello right</div>
+      </div>
+      <div className="footer">
+        <div className="footer-top"></div>
+        <div className="footer-bottom"></div>
+      </div>
     </div>
     </Router>
   );
