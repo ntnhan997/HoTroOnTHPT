@@ -1,24 +1,28 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { CourseContext } from '../context';
 
-const Question = () => {
+const Question = (props) => {
+    const context = useContext(CourseContext);
+    const {handleStatus} = context;
+    const {question, answers, correct, questionId, status} = props;
     return (
         <div>
-            <p class="question">Câu 1: Lúc 8 giờ sáng nay một ô tô đang chạy trên Quốc lộ 1 cách Hà Nội 20 km. Việc xác định vị trí của ô tô như trên còn thiếu yếu tố nào?</p>
+            <p className="question">Câu {questionId}: {question}</p>
             <div className="answer">
-                <input type="radio" name="question" id="question1"/>
-                <label htmlFor="question1">A. Mốc thời gian</label>
+                <input type="radio" name={questionId} id="question1" value={questionId} onClick={(e) => handleStatus(e)}/>
+                <label htmlFor="question1">A. {answers[0]}</label>
             </div>
             <div className="answer">
-                <input type="radio" name="question" id="question2"/>
-                <label htmlFor="question1">B. Vật làm mốc</label>
+                <input type="radio" name={questionId} id="question2" value={questionId} onClick={(e) => handleStatus(e)}/>
+                <label htmlFor="question1">B. {answers[1]}</label>
             </div>
             <div className="answer">
-                <input type="radio" name="question" id="question3"/>
-                <label htmlFor="question1">C. Chiều dương trên đường đi</label>
+                <input type="radio" name={questionId} id="question3" value={questionId} onClick={(e) => handleStatus(e)}/>
+                <label htmlFor="question1">C. {answers[2]}</label>
             </div>
             <div className="answer">
-                <input type="radio" name="question" id="question4"/>
-                <label htmlFor="question1">D. Thước đo và đồng hồ</label>
+                <input type="radio" name={questionId} id="question4" value={questionId} onClick={(e) => handleStatus(e)}/>
+                <label htmlFor="question1">D. {answers[3]}</label>
             </div>
         </div>
     )

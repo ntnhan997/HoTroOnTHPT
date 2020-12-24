@@ -170,3 +170,55 @@
     cursor: pointer;
     font-size: 17px;
 }
+
+.total_question {
+    background-color: #fff;
+    border: 2px solid #c4c4c4;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.status_question {
+    padding: 10px;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    margin: 5px;
+    display: inline-block;
+    border-radius: 50%;
+    border: 1px solid #000000;
+}
+
+.total_question>h4 {
+    font-family: Jura, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 35px;
+    color: #3FC0DA;
+    text-align: center;
+}
+
+.total_question_contain {
+    margin: 15px;
+}
+
+.total_question_footer {
+    height: 110px;
+    width: 100%;
+    background-color: #c4c4c4;
+    padding-left: 15px;
+}
+
+.total_question_footer>span {
+    font-family: Jura, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    height: 50px;
+    width: 50px;
+}
+
+.status_active {
+    background-color: #3FC0DA;
+}
