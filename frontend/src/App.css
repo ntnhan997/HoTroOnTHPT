@@ -122,3 +122,51 @@
     border: 2px solid #c4c4c4;
     border-radius: 5px;
 }
+
+.answer {
+    background: rgba(254, 250, 232, 0.9);
+    border-radius: 24px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.questions {
+    background-color: #fff;
+    border: 2px solid #c4c4c4;
+    border-radius: 5px;
+    margin: 5px 0;
+}
+
+.title_question {
+    color: #04BEE7;
+    font-family: Jura, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 35px;
+    text-align: center;
+}
+
+.question {
+    font-family: Jura, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 35px;
+    padding: 0px 10px;
+}
+
+.answer>label {
+    font-family: Jura, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 17px;
+    line-height: 24px;
+    color: #000000;
+}
+
+.answer>input {
+    background-color: #3FC0DA;
+    cursor: pointer;
+    font-size: 17px;
+}

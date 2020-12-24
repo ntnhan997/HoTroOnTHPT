@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 
 import Course from './components/Course';
+import Exercise from './components/Exercise';
 
 function App() {
   return (
@@ -26,16 +27,15 @@ function App() {
         <div className="header-right"></div>
       </div>
       
+      <Switch>
       <div className="contain">
-        <div className="contain-left"></div>
-        <div className="contain-mid">
-        <Switch>
+        <Route exact path="/khoahoc/baitap" component={Exercise} />
+        
+        
           <Route exact path="/khoahoc" component={Course} />
-        </Switch>
-        </div>
-        <div className="contain-right"></div>
+        
       </div>
-      
+      </Switch>
       <div className="footer">
         <div className="footer-top"></div>
         <div className="footer-bottom"></div>

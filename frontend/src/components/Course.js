@@ -4,11 +4,11 @@ import React from 'react';
 
 const Course = () => {
     return (
-    <div className="course">
-        <div>
-            Course
-        </div>
-    </div>
+    <>
+        <div className="contain-left"></div>
+        <div className="contain-mid course">Course</div>
+        <div className="contain-right"></div>
+    </>
     )
 }
 
