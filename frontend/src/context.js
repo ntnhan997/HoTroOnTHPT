@@ -1,76 +1,185 @@
 import React from 'react';
-
+import swal from 'sweetalert';
 
 const CourseContext = React.createContext();
 
-class CourseProvider extends React.Component{
-    state = {
-        status : [],
-        BaiTap: {
-            title: "Lý 10( Bài Tự Luyện Số 1)",
-            questions: [
-            {
-                question:"Lúc 8 giờ sáng nay một ô tô đang chạy trên Quốc lộ 1 cách Hà Nội 20 km. Việc xác định vị trí của ô tô như trên còn thiếu yếu tố nào?",
-                answers: ["Mốc thời gian", "Vật làm mốc", "Chiều dương trên đường đi", "Thước đo và đồng hồ"],
-                correct: "Chiều dương trên đường đi",
-                questionId: "1"
-            },
-            {
-                question:"1 + 1",
-                answers: ["1", "2", "3", "4"],
-                correct: "2",
-                questionId: "2"
-            },
-            {
-                question:"Lúc 8 giờ sáng nay một ô tô đang chạy trên Quốc lộ 1 cách Hà Nội 20 km. Việc xác định vị trí của ô tô như trên còn thiếu yếu tố nào?",
-                answers: ["Mốc thời gian", "Vật làm mốc", "Chiều dương trên đường đi", "Thước đo và đồng hồ"],
-                correct: "Chiều dương trên đường đi",
-                questionId: "3"
-            },
-            {
-                question:"1 + 1",
-                answers: ["1", "2", "3", "4"],
-                correct: "2",
-                questionId: "4"
-            },
-            {
-                question:"1 + 1",
-                answers: ["1", "2", "3", "4"],
-                correct: "2",
-                questionId: "5"
-            },
-            {
-                question:"2 + 1",
-                answers: ["1", "2", "3", "4"],
-                correct: "2",
-                questionId: "6"
-            }
-            ]
-        }
-    }
 
+class CourseProvider extends React.Component{
+       state = {
+            status : [
+            //     {
+            //     id: "",
+            //     choose: ""
+            // }
+        ],
+            BaiTap: {
+                title: "Lý 10( Bài Tự Luyện Số 1)",
+                questions: [
+                {
+                    question:"Lúc 8 giờ sáng nay một ô tô đang chạy trên Quốc lộ 1 cách Hà Nội 20 km. Việc xác định vị trí của ô tô như trên còn thiếu yếu tố nào?",
+                    answers: ["Mốc thời gian", "Vật làm mốc", "Chiều dương trên đường đi", "Thước đo và đồng hồ"],
+                    correct: "Chiều dương trên đường đi",
+                    questionId: "1"
+                },
+                {
+                    question:"1 + 1 = ?",
+                    answers: ["1", "2", "3", "4"],
+                    correct: "2",
+                    questionId: "2"
+                },
+                {
+                    question:"2 x 6 = ?",
+                    answers: ["50", "1", "0", "12"],
+                    correct: "12",
+                    questionId: "3"
+                },
+                {
+                    question:"6 / 3 = ? ",
+                    answers: ["1", "2", "3", "4"],
+                    correct: "2",
+                    questionId: "4"
+                },
+                {
+                    question:"1 + 2 = ?",
+                    answers: ["1", "2", "3", "4"],
+                    correct: "3",
+                    questionId: "5"
+                },
+                {
+                    question:"10 - 9 = ?",
+                    answers: ["1", "2", "3", "4"],
+                    correct: "1",
+                    questionId: "6"
+                }
+                ]
+            },
+            timer: 10,
+            submit: false,
+            score: 0,
+        }
+    
+    handleTimer = () => {
+        const time = setInterval(() => {
+            this.setState({
+                timer: this.state.timer - 1
+            });
+            if(this.state.timer === 0){
+                this.handleSubmit(); // dang bi bug nen de 2 ham moi chay dc chua tim ra loi
+                this.handleSubmit();
+                clearInterval(time);
+            }
+        }, 1000);
+        
+    }
 
     handleStatus = (e) => {
         if(this.state.status.length === 0){
             this.setState({
-                status: [...this.state.status, e.target.value]
+                status: [
+                    ...this.state.status,
+                    {
+                        id: e.target.name,
+                        choose: e.target.value
+                    }
+                ]
             })
         }else{
-            for(let i of this.state.status){
-                if(Number(i) === Number(e.target.value)){
-                    return
-                }
+            for(let i in this.state.status){
+                if(Number(this.state.status[i].id) === Number(e.target.name)){
+                    console.log(this.state.status.slice(0, i));
+                    this.setState({
+                        status: [
+                            ...this.state.status.slice(0, i),
+                            {
+                                id: e.target.name,
+                                choose: e.target.value
+                            },
+                            ...this.state.status.slice(i + 1, this.state.status.length)
+                        ]
+                    })
+                    return 0;
+                }    
             }
             this.setState({
-                status: [...this.state.status, e.target.value]
+                status: [
+                    ...this.state.status,
+                    {
+                        id: e.target.name,
+                        choose: e.target.value
+                    }
+                ]
             })
+        }
+    }
+    handleSubmit = () => {
+
+        if(this.state.timer === 0 || (this.state.status.length === this.state.BaiTap.questions.length) ){
+            this.checkAnswerCorrect();
+        }else{
+
+        if(this.state.status.length !== this.state.BaiTap.questions.length ){
+            swal({
+                title: "Bạn có chắc chắn bạn nộp bài?",
+                text: `Vì còn ${this.state.BaiTap.questions.length - this.state.status.length} câu bạn chưa hoàn thành!`,
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+              })
+              .then((willDelete) => {
+                if (willDelete) {
+                    this.checkAnswerCorrect(); // dang bug nen de 2 ham moi chay dc
+                    this.checkAnswerCorrect();
+                } else {
+                  
+                }
+              });
+        }
+    }
+    }
+
+    handleReset = (po) => { //po ham de chuyen url ve trang nao muon
+        this.setState({
+            status: [],
+            submit: false, 
+            timer: 900,
+            score: 0,
+        })
+        po();
+    }
+
+    checkAnswerCorrect = () => {
+        this.setState({
+            submit: true
+        });
+        // this.state.status // ket qua chon id choose
+        // this.state.questions // dap an   questionId    correct
+        let dem = 0;
+        for(let index of this.state.status){
+            for(let item of this.state.BaiTap.questions){
+                if(Number(index.id) === Number(item.questionId) && index.choose === item.correct){
+                    dem ++;
+                    this.setState({
+                        score: dem
+                    })
+                }
+            }
+        }
+        for(let item of this.state.status){
+            for(let index of this.state.BaiTap.questions){
+                if(Number(item.id) === Number(index.questionId)){
+                    item.correct = index.correct;
+                }
+            }
         }
     }
     render(){
         return(
             <CourseContext.Provider value = {{
                 ...this.state,
-                handleStatus: this.handleStatus
+                handleStatus: this.handleStatus,
+                handleTimer: this.handleTimer,
+                handleSubmit: this.handleSubmit,
+                handleReset: this.handleReset
             }} >
                  {this.props.children}   
             </CourseContext.Provider>
