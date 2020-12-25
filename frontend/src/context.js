@@ -12,6 +12,40 @@ class CourseProvider extends React.Component{
             //     choose: ""
             // }
         ],
+        MonHoc: [
+            {
+                id: 0,
+                name: "Toán",
+                img: "/images/monhoc/toan.png",
+                date: "01/20"
+            },
+            {
+                id: 1,
+                name: "Lý",
+                img: "/images/monhoc/toan.png",
+                date: "05/20"
+            },
+            {
+                id: 2,
+                name: "Hóa",
+                img: "/images/monhoc/toan.png",
+                date: "09/20"
+            },
+            {
+                id: 3,
+                name: "Sinh",
+                img: "/images/monhoc/toan.png",
+                date: "10/20"
+            },
+            {
+                id: 4,
+                name: "Anh Văn",
+                img: "/images/monhoc/toan.png",
+                date: "05/20"
+            }
+
+        ]
+        ,
             BaiTap: {
                 title: "Lý 10( Bài Tự Luyện Số 1)",
                 questions: [
@@ -53,7 +87,7 @@ class CourseProvider extends React.Component{
                 }
                 ]
             },
-            timer: 10,
+            timer: 20,
             submit: false,
             score: 0,
         }
@@ -63,9 +97,11 @@ class CourseProvider extends React.Component{
             this.setState({
                 timer: this.state.timer - 1
             });
+            if(this.state.submit === true){
+                clearInterval(time);
+            }
             if(this.state.timer === 0){
                 this.handleSubmit(); // dang bi bug nen de 2 ham moi chay dc chua tim ra loi
-                this.handleSubmit();
                 clearInterval(time);
             }
         }, 1000);
@@ -115,6 +151,7 @@ class CourseProvider extends React.Component{
 
         if(this.state.timer === 0 || (this.state.status.length === this.state.BaiTap.questions.length) ){
             this.checkAnswerCorrect();
+            this.checkAnswerCorrect();
         }else{
 
         if(this.state.status.length !== this.state.BaiTap.questions.length ){
@@ -127,7 +164,7 @@ class CourseProvider extends React.Component{
               })
               .then((willDelete) => {
                 if (willDelete) {
-                    this.checkAnswerCorrect(); // dang bug nen de 2 ham moi chay dc
+                    this.checkAnswerCorrect(); // dang bi bug nen de 2 ham moi chay dc
                     this.checkAnswerCorrect();
                 } else {
                   
@@ -141,7 +178,7 @@ class CourseProvider extends React.Component{
         this.setState({
             status: [],
             submit: false, 
-            timer: 900,
+            timer: 20,
             score: 0,
         })
         po();

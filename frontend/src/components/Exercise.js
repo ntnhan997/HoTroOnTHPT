@@ -45,7 +45,7 @@ const Exercise = (props) => {
                         {formatTimer()}
                     </span>
 
-                    <button type="button" onClick={handleTimer}>click</button>
+                    {/* <button type="button" onClick={handleTimer}>click</button> */}
 
                 </div>
 

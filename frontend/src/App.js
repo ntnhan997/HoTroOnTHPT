@@ -15,6 +15,8 @@ import Exercise from './components/Exercise';
 import fb from './images/fb.png';
 import ig from './images/instagram.png';
 import yt from './images/youtube.png';
+import Subject from './components/Subject';
+import Details from './components/Details';
 
 
 function App() {
@@ -36,8 +38,9 @@ function App() {
       <div className="contain">
         <Route exact path="/khoahoc/monhoc/baitap" component={Exercise} />
         
-        
         <Route exact path="/khoahoc" component={Course} />
+
+        <Route exact path="/khoahoc/:id" component={Details} />
         
       </div>
       </Switch>
