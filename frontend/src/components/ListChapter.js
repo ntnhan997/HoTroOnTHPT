@@ -5,7 +5,7 @@ import InfoUser from './InfoUser';
 
 const ListChapter = (props) => {
     const context = useContext(CourseContext);
-    const {DanhSachChuong, handleLoadChapter} = context;
+    const {DanhSachChuong} = context;
     const params = props.match.params.name;
     return (
         <div className="list-chapter">
@@ -21,7 +21,7 @@ const ListChapter = (props) => {
                         {
                             DanhSachChuong.map(item => {
                                 return (
-                                        <Link to={"/khoahoc/"+ params + "/" + item.idChapter} onClick={() => handleLoadChapter(item.idChapter)}><p>{item.idChapter + 1}. {item.name}</p></Link>
+                                        <Link to={"/khoahoc/"+ params + "/" + item.idChapter}><p>{item.idChapter + 1}. {item.name}</p></Link>
                                 )
                             })
                         }

@@ -8,7 +8,7 @@ const Subject = (props) => {
             <div className="cover-subject">
                 <img className="img-top" src={img} style= {name === "Hoa" ? { top: "-14px" } : {}} alt=""/>
                 <img className="img-bottom" src={cover} alt=""/>
-                <p className="name-subject">{name}</p>
+                <p className="name-subject">{name === "toan" ? "Toán": name === "hoa" ? "Hóa" : "Lý"}</p>
             </div>
 
             <p>{date}</p>

@@ -11,7 +11,7 @@ import InfoUser from './InfoUser';
 
 const Course = () => {
     const context = useContext(CourseContext);
-    const {MonHoc} = context;
+    const {MonHoc, handleLoadLesson} = context;
     return (
     <>
         <div className="contain-left"></div>
@@ -24,7 +24,7 @@ const Course = () => {
                         <h3>Môn Học</h3>
                         <div className="list_subject">
                             {MonHoc.map(item => {
-                                return <Link to={"/khoahoc/" + item.name}><Subject key = {item.id} id={item.id} name={item.name} img={item.img} date={item.date} /></Link>
+                                return <Link to={"/khoahoc/" + item.name} onClick = {handleLoadLesson}><Subject key = {item.id} id={item.id} name={item.name} img={item.img} date={item.date} /></Link>
                             })}
                         </div>
                     </div>          

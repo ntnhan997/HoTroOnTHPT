@@ -3,6 +3,10 @@ import swal from 'sweetalert';
 
 import axios from 'axios';
 
+
+
+import {data} from './data/toan';
+
 const CourseContext = React.createContext();
 
 class CourseProvider extends React.Component{
@@ -38,65 +42,65 @@ class CourseProvider extends React.Component{
             BaiTap: {
                 title: "Lý 10( Bài Tự Luyện Số 1)",
                 questions: [
-                {
-                    question:"Lúc 8 giờ sáng nay một ô tô đang chạy trên Quốc lộ 1 cách Hà Nội 20 km. Việc xác định vị trí của ô tô như trên còn thiếu yếu tố nào?",
-                    answers: ["Mốc thời gian", "Vật làm mốc", "Chiều dương trên đường đi", "Thước đo và đồng hồ"],
-                    correct: "Chiều dương trên đường đi",
-                    questionId: "1"
-                },
-                {
-                    question:"1 + 1 = ?",
-                    answers: ["1", "2", "3", "4"],
-                    correct: "2",
-                    questionId: "2"
-                },
-                {
-                    question:"2 x 6 = ?",
-                    answers: ["50", "1", "0", "12"],
-                    correct: "12",
-                    questionId: "3"
-                },
-                {
-                    question:"6 / 3 = ? ",
-                    answers: ["1", "2", "3", "4"],
-                    correct: "2",
-                    questionId: "4"
-                },
-                {
-                    question:"1 + 2 = ?",
-                    answers: ["1", "2", "3", "4"],
-                    correct: "3",
-                    questionId: "5"
-                },
-                {
-                    question:"10 - 9 = ?",
-                    answers: ["1", "2", "3", "4"],
-                    correct: "1",
-                    questionId: "6"
-                }
+                // {
+                //     question:"Lúc 8 giờ sáng nay một ô tô đang chạy trên Quốc lộ 1 cách Hà Nội 20 km. Việc xác định vị trí của ô tô như trên còn thiếu yếu tố nào?",
+                //     answers: ["Mốc thời gian", "Vật làm mốc", "Chiều dương trên đường đi", "Thước đo và đồng hồ"],
+                //     correct: "Chiều dương trên đường đi",
+                //     questionId: "1"
+                // },
+                // {
+                //     question:"1 + 1 = ?",
+                //     answers: ["1", "2", "3", "4"],
+                //     correct: "2",
+                //     questionId: "2"
+                // },
+                // {
+                //     question:"2 x 6 = ?",
+                //     answers: ["50", "1", "0", "12"],
+                //     correct: "12",
+                //     questionId: "3"
+                // },
+                // {
+                //     question:"6 / 3 = ? ",
+                //     answers: ["1", "2", "3", "4"],
+                //     correct: "2",
+                //     questionId: "4"
+                // },
+                // {
+                //     question:"1 + 2 = ?",
+                //     answers: ["1", "2", "3", "4"],
+                //     correct: "3",
+                //     questionId: "5"
+                // },
+                // {
+                //     question:"10 - 9 = ?",
+                //     answers: ["1", "2", "3", "4"],
+                //     correct: "1",
+                //     questionId: "6"
+                // }
                 ]
             },
             DanhSachChuong :[
-                {
-                    idChapter: 0,
-                    name: "Tổ Hợp",
-                    subject: "toan"
-                },
-                {
-                    idChapter: 1,
-                    name: "So Sánh",
-                    subject: "toan"
-                },
-                {
-                    idChapter: 2,
-                    name: "So Sánhhh",
-                    subject: "toan"
-                },
-                {
-                    idChapter: 3,
-                    name: "So Sánhhhhhhh",
-                    subject: "toan"
-                }
+                // {
+                //     idChapter: 0,
+                //     name: "Tổ Hợp",
+                //     subject: "toan"
+                // },
+                // {
+                //     idChapter: 1,
+                //     name: "So Sánh",
+                //     subject: "toan"
+                // },
+                // {
+                //     idChapter: 2,
+                //     name: "So Sánhhh",
+                //     subject: "toan"
+                // },
+                // {
+                //     idChapter: 3,
+                //     name: "So Sánhhhhhhh",
+                //     subject: "toan"
+                // }
             ],
             chapter: {}
             ,
@@ -226,33 +230,48 @@ class CourseProvider extends React.Component{
         }
     }
 
+    handleLoadLesson = () => {
+        this.setState({
+            DanhSachChuong: data[0].course.chapter
+        })
+        console.log(this.state.DanhSachChuong);
+    }
+
     handleLoadChapter = async(id) => {
         const data = await axios.get("https://web-on-tap.herokuapp.com/lesson/"+ id);
         this.setState({
-            chapter: data.data
+            chapter: data.data[0]
         })
+        console.log(data.data[0]);
     }
 
 
-    // handleLoadExam = async (id) => {
-    //     const data = await axios.get("https://web-on-tap.herokuapp.com/exam/1");
-    //     const datas = data.data;
-    //     const answers = [datas.answer1, datas.answer2, datas.answer3, datas.answer4];
-    //     const correct = answers[datas.rightanswer - 1];
-    //     this.setState({
-    //         BaiTap: {
-    //             title: "toan",
-    //             questions: [
-    //                 {
-    //                     question:   datas.question,
-    //                     answers,
-    //                     correct,
-    //                     questionId: datas.idExam
-    //                 }
-    //             ]
-    //         }
-    //     })
-    // }
+    handleLoadExam = async (id) => {
+        this.setState({
+            BaiTap: {
+                questions: []
+            }
+        })
+        const data = await axios.get("https://web-on-tap.herokuapp.com/exam/1");
+        const datas = data.data;
+        for(let index of datas){
+            const answers = [index.answer1, index.answer2, index.answer3, index.answer4];
+            const correct = answers[index.rightanswer - 1];
+            this.setState({
+                BaiTap: {
+                    questions: [
+                        ...this.state.BaiTap.questions,
+                        {
+                            question:   index.question,
+                            answers,
+                            correct,
+                            questionId: index.idExam
+                        }
+                    ]
+                }
+            })
+        }
+    }
 
     render(){
         return(
@@ -263,7 +282,8 @@ class CourseProvider extends React.Component{
                 handleSubmit: this.handleSubmit,
                 handleReset: this.handleReset,
                 handleLoadChapter: this.handleLoadChapter,
-                // handleLoadExam: this.handleLoadExam
+                handleLoadLesson: this.handleLoadLesson,
+                handleLoadExam: this.handleLoadExam
             }} >
                  {this.props.children}   
             </CourseContext.Provider>

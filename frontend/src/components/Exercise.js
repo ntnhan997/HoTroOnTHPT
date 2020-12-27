@@ -6,9 +6,9 @@ import Union from '../images/Union.png';
 
 
 const Exercise = (props) => {
-    console.log(props);
     const context = useContext(CourseContext);
-    const {status,BaiTap,timer,handleTimer, submit, handleSubmit, score, handleReset} = context;
+    const idLess = props.match.params.idLesson;
+    const {status,BaiTap,timer,handleTimer, submit, handleSubmit, score, handleReset, handleLoadExam} = context;
     const StatusActive = (id) => {
         for (let i of status){
             if (Number(i.id) === Number(id)){
@@ -17,15 +17,14 @@ const Exercise = (props) => {
         }
         return false;
     }
-
     useEffect(() => {
-        let i = () => {
-            return 0;
-        };
-        handleReset(i);
-        handleTimer();
-    }, [handleTimer, handleReset]);
-
+        handleLoadExam(idLess);
+            let i = () => {
+                return 0;
+            };
+            handleReset(i);
+            handleTimer();
+    }, [handleTimer, handleReset,handleLoadExam,idLess]);
     const formatTimer =  () => {
         let measuredTime = new Date(null);
         measuredTime.setSeconds(timer); // specify value of SECONDS
@@ -48,7 +47,10 @@ const Exercise = (props) => {
     
     return (
         <>
-            <div className="contain-left">
+        {
+            BaiTap.questions.length > 0 ?
+                <>
+                    <div className="contain-left">
                 <div className="info-left">
 
                 <div className="timer-question">
@@ -162,6 +164,16 @@ const Exercise = (props) => {
                    
                 </div>
             </div>
+                </>
+
+
+            :
+
+            <div>
+                loading
+            </div>
+        }
+            
         </>
     )
 }
