@@ -4,9 +4,6 @@ import swal from 'sweetalert';
 import axios from 'axios';
 
 
-
-import {data} from './data/toan';
-
 const CourseContext = React.createContext();
 
 class CourseProvider extends React.Component{
@@ -80,30 +77,8 @@ class CourseProvider extends React.Component{
                 // }
                 ]
             },
-            DanhSachChuong :[
-                // {
-                //     idChapter: 0,
-                //     name: "Tổ Hợp",
-                //     subject: "toan"
-                // },
-                // {
-                //     idChapter: 1,
-                //     name: "So Sánh",
-                //     subject: "toan"
-                // },
-                // {
-                //     idChapter: 2,
-                //     name: "So Sánhhh",
-                //     subject: "toan"
-                // },
-                // {
-                //     idChapter: 3,
-                //     name: "So Sánhhhhhhh",
-                //     subject: "toan"
-                // }
-            ],
-            chapter: {}
-            ,
+            chapter: {},
+            listchapter : [],
             timer: 20,
             submit: false,
             score: 0,
@@ -230,11 +205,11 @@ class CourseProvider extends React.Component{
         }
     }
 
-    handleLoadLesson = () => {
+    handleLoadLesson = async(name) => {
+        const data = await axios.get("https://web-on-tap.herokuapp.com/lesson/chapter/" + name);
         this.setState({
-            DanhSachChuong: data[0].course.chapter
-        })
-        console.log(this.state.DanhSachChuong);
+            listchapter: data.data
+        });
     }
 
     handleLoadChapter = async(id) => {

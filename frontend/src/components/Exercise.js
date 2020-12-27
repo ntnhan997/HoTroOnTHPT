@@ -18,12 +18,12 @@ const Exercise = (props) => {
         return false;
     }
     useEffect(() => {
-        handleLoadExam(idLess);
-            let i = () => {
-                return 0;
-            };
-            handleReset(i);
-            handleTimer();
+            handleLoadExam(idLess);
+                let i = () => {
+                    return 0;
+                };
+                handleReset(i);
+                handleTimer();
     }, [handleTimer, handleReset,handleLoadExam,idLess]);
     const formatTimer =  () => {
         let measuredTime = new Date(null);

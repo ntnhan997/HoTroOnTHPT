@@ -7,6 +7,9 @@ const DetailsChapter = (props) => {
     const context = useContext(CourseContext);
     const {chapter, handleLoadChapter} = context;
     const id = props.match.params.id;
+    let arrayList = [];
+    
+    console.log(arrayList);
     console.log(id);
     useEffect(() => {
         handleLoadChapter(id);
