@@ -212,12 +212,20 @@
 .subject-contain>h3 {
     font-family: "Roboto", sans-serif;
     font-style: normal;
-    font-weight: 500;
+    font-weight: bold;
     font-size: 20px;
     line-height: 23px;
     color: #000000;
     text-align: center;
     padding-top: 40px;
+}
+
+.subject-contain>a>p{
+    color: black;
+}
+
+.subject-contain>a>p:hover{
+    color: #1BC47D;
 }
 
 .footer {
@@ -390,18 +398,16 @@ a {
     font-style: normal;
     font-weight: bold;
     font-size: 20px;
-    line-height: 35px;
     color: #3FC0DA;
     text-align: center;
-}
-
-.total_question_contain {
     margin: 15px;
 }
 
+.total_question_contain {
+    margin: 0 15px 15px;
+}
+
 .total_question_footer {
-    height: 110px;
-    width: 94%;
     background-color: #c4c4c4;
     display: flex;
     flex-direction: row;
@@ -465,7 +471,7 @@ a {
     font-family: Roboto, sans-serif;
     font-style: normal;
     font-weight: bold;
-    font-size: 25px;
+    font-size: 22px;
     line-height: 29px;
     color: #FFFFFF;
     background-color: #3FC0DA;
@@ -574,6 +580,11 @@ a {
     font-weight: bold;
     font-size: 16px;
     line-height: 20px;
+    color: #000000;
+}
+
+.name-subject:hover {
+    color: white;
 }
 
 .course>h3 {
@@ -693,3 +704,39 @@ a {
 .btn-BaiTap:hover {
     background: #14945f;
 }
+
+.btn-center{
+    display: flex;
+    justify-content: center;
+}
+
+.loader{
+    width: 100%;
+    height: 90%;
+    background-color: #80808061;
+    position: absolute;
+    z-index: 1;
+}
+
+.loader_icon {
+    top: 35%;
+    left: 50%;
+    position: absolute;
+    border: 8px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 8px solid #3498db;
+    width: 50px;
+    height: 50px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+  }
+  
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }

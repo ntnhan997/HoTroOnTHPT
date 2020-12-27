@@ -168,10 +168,9 @@ const Exercise = (props) => {
 
 
             :
-
-            <div>
-                loading
-            </div>
+            <div className="loader">
+                <div className="loader_icon"></div>
+            </div>               
         }
             
         </>

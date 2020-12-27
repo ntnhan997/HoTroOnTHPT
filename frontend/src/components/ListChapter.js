@@ -42,7 +42,9 @@ const ListChapter = (props) => {
         
         
         
-        : <div>loading</div>}
+        : <div className="loader">
+            <div className="loader_icon"></div>
+        </div>}
         
         </>
     )

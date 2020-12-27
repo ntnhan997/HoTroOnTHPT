@@ -29,7 +29,7 @@ const DetailsChapter = (props) => {
                         <p>{chapter.content1}</p>
                         <h5>2. Các dạng bài tập</h5>
                         <p>{chapter.content2}</p>
-                        <div>
+                        <div className="btn-center">
                             <Link to = {"/khoahoc/toan/" + chapter.idChapter + "/" + chapter.idLesson}><button type="button" className="btn-BaiTap">Bài Tập</button></Link>
                         </div>
                     </div>          
@@ -38,7 +38,9 @@ const DetailsChapter = (props) => {
             <div className="details-chapter-right"></div>
         </div>
         
-        : <div>loading</div>}
+        : <div className="loader">
+            <div className="loader_icon"></div>
+        </div>}
         
         </>
     )
