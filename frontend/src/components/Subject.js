@@ -6,7 +6,7 @@ const Subject = (props) => {
     return (
         <div className="subject">
             <div className="cover-subject">
-                <img className="img-top" src={img} alt=""/>
+                <img className="img-top" src={img} style= {name === "Hoa" ? { top: "-14px" } : {}} alt=""/>
                 <img className="img-bottom" src={cover} alt=""/>
                 <p className="name-subject">{name}</p>
             </div>

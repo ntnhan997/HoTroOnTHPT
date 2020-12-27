@@ -1,11 +1,12 @@
 /* eslint-disable no-unused-vars */
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { CourseContext } from '../context';
 import Question from "./Question";
 import Union from '../images/Union.png';
 
 
 const Exercise = (props) => {
+    console.log(props);
     const context = useContext(CourseContext);
     const {status,BaiTap,timer,handleTimer, submit, handleSubmit, score, handleReset} = context;
     const StatusActive = (id) => {
@@ -16,6 +17,15 @@ const Exercise = (props) => {
         }
         return false;
     }
+
+    useEffect(() => {
+        let i = () => {
+            return 0;
+        };
+        handleReset(i);
+        handleTimer();
+    }, [handleTimer, handleReset]);
+
     const formatTimer =  () => {
         let measuredTime = new Date(null);
         measuredTime.setSeconds(timer); // specify value of SECONDS
@@ -33,12 +43,14 @@ const Exercise = (props) => {
     }
 
     const handle = () => {
-        props.history.push("/");
+        props.history.push("/khoahoc/");
     }
-
+    
     return (
         <>
             <div className="contain-left">
+                <div className="info-left">
+
                 <div className="timer-question">
                     <img src={Union} alt="image1"/>
                     <span>
@@ -59,6 +71,9 @@ const Exercise = (props) => {
                         
                     </div>
                 }
+
+                </div>
+                
                 
                 
             </div>
@@ -77,6 +92,7 @@ const Exercise = (props) => {
                 }
             </div>
             <div className="contain-right">
+                <div className="info-right">
                 <div className="total_question">
                     <h4>Tổng số câu hỏi: {BaiTap.questions.length}</h4>
                     {
@@ -136,7 +152,14 @@ const Exercise = (props) => {
                        }
                                 
                    </div>
-                   { !submit ? <button type="button" className="btn-NopBai" onClick={handleSubmit}>Nộp bài</button> : <button type="button" className="btn-NopBai" onClick={() => handleReset(handle)}>Kết thúc</button>}
+                   <div className="total_question_footer_bottom">
+                        { !submit ? <button type="button" className="btn-NopBai" onClick={handleSubmit}>Nộp bài</button> : <button type="button" className="btn-NopBai" onClick={() => handleReset(handle)}>Kết thúc</button>}
+                   </div>
+
+
+                </div>
+                
+                   
                 </div>
             </div>
         </>

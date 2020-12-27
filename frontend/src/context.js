@@ -1,8 +1,9 @@
 import React from 'react';
 import swal from 'sweetalert';
 
-const CourseContext = React.createContext();
+import axios from 'axios';
 
+const CourseContext = React.createContext();
 
 class CourseProvider extends React.Component{
        state = {
@@ -15,33 +16,21 @@ class CourseProvider extends React.Component{
         MonHoc: [
             {
                 id: 0,
-                name: "Toán",
+                name: "toan",
                 img: "/images/monhoc/toan.png",
                 date: "01/20"
             },
             {
                 id: 1,
-                name: "Lý",
-                img: "/images/monhoc/toan.png",
+                name: "ly",
+                img: "/images/monhoc/ly.png",
                 date: "05/20"
             },
             {
                 id: 2,
-                name: "Hóa",
-                img: "/images/monhoc/toan.png",
+                name: "hoa",
+                img: "/images/monhoc/hoa.png",
                 date: "09/20"
-            },
-            {
-                id: 3,
-                name: "Sinh",
-                img: "/images/monhoc/toan.png",
-                date: "10/20"
-            },
-            {
-                id: 4,
-                name: "Anh Văn",
-                img: "/images/monhoc/toan.png",
-                date: "05/20"
             }
 
         ]
@@ -87,6 +76,30 @@ class CourseProvider extends React.Component{
                 }
                 ]
             },
+            DanhSachChuong :[
+                {
+                    idChapter: 0,
+                    name: "Tổ Hợp",
+                    subject: "toan"
+                },
+                {
+                    idChapter: 1,
+                    name: "So Sánh",
+                    subject: "toan"
+                },
+                {
+                    idChapter: 2,
+                    name: "So Sánhhh",
+                    subject: "toan"
+                },
+                {
+                    idChapter: 3,
+                    name: "So Sánhhhhhhh",
+                    subject: "toan"
+                }
+            ],
+            chapter: {}
+            ,
             timer: 20,
             submit: false,
             score: 0,
@@ -99,10 +112,12 @@ class CourseProvider extends React.Component{
             });
             if(this.state.submit === true){
                 clearInterval(time);
+                this.setState({timer: 0});
             }
             if(this.state.timer === 0){
                 this.handleSubmit(); // dang bi bug nen de 2 ham moi chay dc chua tim ra loi
                 clearInterval(time);
+                this.setState({timer: 0});
             }
         }, 1000);
         
@@ -201,6 +216,7 @@ class CourseProvider extends React.Component{
                 }
             }
         }
+
         for(let item of this.state.status){
             for(let index of this.state.BaiTap.questions){
                 if(Number(item.id) === Number(index.questionId)){
@@ -209,6 +225,35 @@ class CourseProvider extends React.Component{
             }
         }
     }
+
+    handleLoadChapter = async(id) => {
+        const data = await axios.get("https://web-on-tap.herokuapp.com/lesson/"+ id);
+        this.setState({
+            chapter: data.data
+        })
+    }
+
+
+    // handleLoadExam = async (id) => {
+    //     const data = await axios.get("https://web-on-tap.herokuapp.com/exam/1");
+    //     const datas = data.data;
+    //     const answers = [datas.answer1, datas.answer2, datas.answer3, datas.answer4];
+    //     const correct = answers[datas.rightanswer - 1];
+    //     this.setState({
+    //         BaiTap: {
+    //             title: "toan",
+    //             questions: [
+    //                 {
+    //                     question:   datas.question,
+    //                     answers,
+    //                     correct,
+    //                     questionId: datas.idExam
+    //                 }
+    //             ]
+    //         }
+    //     })
+    // }
+
     render(){
         return(
             <CourseContext.Provider value = {{
@@ -216,7 +261,9 @@ class CourseProvider extends React.Component{
                 handleStatus: this.handleStatus,
                 handleTimer: this.handleTimer,
                 handleSubmit: this.handleSubmit,
-                handleReset: this.handleReset
+                handleReset: this.handleReset,
+                handleLoadChapter: this.handleLoadChapter,
+                // handleLoadExam: this.handleLoadExam
             }} >
                  {this.props.children}   
             </CourseContext.Provider>

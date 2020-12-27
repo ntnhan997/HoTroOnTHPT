@@ -86,6 +86,13 @@
 .contain-left {
     min-height: 500px;
     flex: 1;
+    position: relative;
+}
+
+.info-left,
+.info-right {
+    position: fixed;
+    width: 20%;
 }
 
 .contain-mid {
@@ -100,6 +107,117 @@
 .contain-right {
     min-height: 500px;
     flex: 1;
+}
+
+.contain-course {
+    min-height: 500px;
+    flex: 3;
+    border-radius: 5px;
+    margin: 5px 0;
+    display: flex;
+}
+
+.course {
+    background-color: #fff;
+    border: 2px solid #c4c4c4;
+    border-radius: 5px;
+    margin: 5px 0;
+    flex: 3;
+}
+
+.user-name {
+    flex: 1;
+    margin: 5px 0;
+}
+
+.info-username {
+    background-color: #fff;
+    border: 2px solid #c4c4c4;
+    border-radius: 5px;
+    width: 150px;
+    text-align: center;
+}
+
+.info-vip {
+    color: #fff;
+    padding: 2px;
+    background-color: #FC0202;
+    display: inline-block;
+    font-family: sans-serif;
+    font-size: 14px;
+    margin: 5px;
+    margin-left: 110px;
+}
+
+.info-user {
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    color: #000000;
+}
+
+.info-level {
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    /* identical to box height */
+    color: #959090;
+    margin-bottom: 0;
+}
+
+.info-avatar {
+    background-color: #FFC000;
+    padding: 10px;
+    display: inline-block;
+    border-radius: 50px;
+}
+
+.info-score {
+    padding: 10px;
+    background-color: #1BC47D;
+    width: 70px;
+    display: inline;
+    color: #fff;
+}
+
+.info-studying {
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 10px;
+    color: #000000;
+    padding-top: 10px;
+}
+
+.box-course {
+    padding: 0 20px 20px 20px;
+}
+
+.box-course>h4 {
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 12px;
+    color: #E76060;
+}
+
+.subject-contain {
+    border-top: 2px solid #c4c4c4;
+}
+
+.subject-contain>h3 {
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23px;
+    color: #000000;
+    text-align: center;
+    padding-top: 40px;
 }
 
 .footer {
@@ -308,6 +426,13 @@ a {
     width: 50px;
 }
 
+.total_question_footer_bottom {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .status_active {
     background-color: #3FC0DA;
 }
@@ -352,7 +477,7 @@ a {
     justify-content: center;
     align-items: center;
     border: none;
-    margin: 5px 0px 5px 50px;
+    margin: 5px 0px;
     cursor: pointer;
 }
 
@@ -407,7 +532,7 @@ a {
 }
 
 .subject {
-    padding-left: 35px;
+    padding-right: 20px;
     margin-bottom: 70px;
 }
 
@@ -465,7 +590,9 @@ a {
 .list_subject {
     display: flex;
     flex-wrap: wrap;
-    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .details {
@@ -488,4 +615,81 @@ a {
     border: 2px solid #c4c4c4;
     border-radius: 5px;
     margin: 5px 0;
+}
+
+.list-chapter {
+    display: flex;
+    width: 100%;
+}
+
+.list-chapter-mid {
+    background-color: #fff;
+    border: 2px solid #c4c4c4;
+    border-radius: 5px;
+    margin: 5px 0;
+    min-height: 500px;
+    flex: 3;
+}
+
+.list-chapter-left {
+    flex: 1;
+}
+
+.list-chapter-right {
+    flex: 1;
+}
+
+.btn-back {
+    font-family: "Roboto Mono", sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    color: #959090;
+    float: right;
+    margin-top: 20px;
+}
+
+.hello-user-chapter {
+    display: inline-block;
+}
+
+.details-chapter {
+    width: 100%;
+    display: flex;
+}
+
+.details-chapter-left {
+    flex: 1;
+}
+
+.details-chapter-right {
+    flex: 1;
+}
+
+.details-chapter-mid {
+    flex: 3;
+    background-color: #fff;
+    border: 2px solid #c4c4c4;
+    border-radius: 5px;
+    margin: 5px 0;
+    min-height: 500px;
+}
+
+.btn-BaiTap {
+    width: 110px;
+    height: 38px;
+    background: #1BC47D;
+    border-radius: 7px;
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.btn-BaiTap:hover {
+    background: #14945f;
 }
