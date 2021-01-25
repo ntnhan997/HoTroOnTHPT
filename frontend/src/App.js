@@ -17,12 +17,14 @@ import ig from './images/instagram.png';
 import yt from './images/youtube.png';
 import ListChapter from './components/ListChapter';
 import DetailsChapter from './components/DetailsChapter';
+import Login from "./components/Login";
+import Register from "./components/Register";
 
 
 function App() {
   return (
     <Router>
-    <div className="container">
+    <div className="container-page">
       <div className="header">
         <div className="header-left"></div>
         <div className="header-mid">
@@ -43,7 +45,10 @@ function App() {
         <Route exact path="/khoahoc/:name/:id" component={DetailsChapter} />
 
         <Route exact path="/khoahoc/:name" component={ListChapter} />
-        
+
+        <Route exact path="/dangnhap" component={Login} />
+
+        <Route exact path="/dangky" component={Register} />
       </div>
       </Switch>
       <div className="footer">
