@@ -5,10 +5,10 @@ import InfoUser from './InfoUser';
 
 const ListChapter = (props) => {
     const context = useContext(CourseContext);
-    const {listchapter,handleLoadLesson} = context;
+    const {listchapter, user, handleLoadLesson} = context;
     const params = props.match.params.name;
     console.log(listchapter);
-
+    console.log(user);
     useEffect(() => {
         handleLoadLesson(params);
     },[handleLoadLesson, params])
@@ -21,7 +21,7 @@ const ListChapter = (props) => {
         <InfoUser />
         <div className="course">
             <div className="box-course">
-                <h4 className="hello-user-chapter">Xin chào, USER NAME</h4>
+                <h4 className="hello-user-chapter">Xin chào, { user === "" ? "USER NAME" : user }</h4>
                 <Link to="/khoahoc/"><span className="btn-back">Quay lại</span></Link>
                 <div className="subject-contain">
                     <h4>Môn Toán</h4>
