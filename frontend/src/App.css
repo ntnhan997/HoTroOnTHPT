@@ -418,8 +418,8 @@ a {
 
 .status_question {
     padding: 10px;
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     text-align: center;
     margin: 5px;
     display: inline-block;
@@ -451,6 +451,7 @@ a {
 .total_question_footer_left {
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
 }
 
 .total_question_footer_right {
@@ -471,6 +472,12 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.question_number {
+    position: absolute;
+    margin-top: -8px;
+    margin-left: -4px;
 }
 
 .status_active {
@@ -774,6 +781,10 @@ a {
 
   .dropdown .btn {
     padding: .2rem .6rem;
+  }
+
+  .total_question_footer_bottom>button:focus {
+    outline: none !important;
   }
 
   /* dots */
