@@ -11,7 +11,7 @@ import InfoUser from './InfoUser';
 
 const Course = () => {
     const context = useContext(CourseContext);
-    const {MonHoc, handleLoadLesson} = context;
+    const {MonHoc, user, handleLoadLesson} = context;
     return (
     <>
         <div className="contain-left"></div>
@@ -19,7 +19,7 @@ const Course = () => {
             <InfoUser />
             <div className="course">
                 <div className="box-course">
-                    <h4>Xin chào, USER NAME</h4>
+                    <h4>Xin chào, { user === "" ? "USER NAME" : user }</h4>
                     <div className="subject-contain">
                         <h3>Môn Học</h3>
                         <div className="list_subject">

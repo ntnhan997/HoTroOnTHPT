@@ -71,7 +71,7 @@ class CourseProvider extends React.Component{
                 // },
                 // {
                 //     question:"10 - 9 = ?",
-                //     answers: ["1", "2", "3", "4"],
+                //     answers: ["1", "2", "3", "4"],   
                 //     correct: "1",
                 //     questionId: "6"
                 // }
@@ -82,6 +82,11 @@ class CourseProvider extends React.Component{
             timer: 20,
             submit: false,
             score: 0,
+            loginSuccess: false,
+            loginFailed: false,
+            registerSuccess: false,
+            logout: false,
+            user: ""
         }
     
     handleTimer = () => {
@@ -248,6 +253,50 @@ class CourseProvider extends React.Component{
         }
     }
 
+    handleLogin = async(email, password) => {
+        // const data = await axios.get("https://web-on-tap-be.herokuapp.com/login/")
+        if(email === "tanphat@gmail.com" && password === "1234") {
+            this.setState({
+                loginSuccess: true,
+                loginFailed: false,
+                user: "tanphat"
+            });
+        } else {
+            this.setState({
+                loginFailed: true
+            });
+        }
+    }
+
+  
+
+    handleRegister = async(email, password, repeatPassword) => {
+        // const data = await axios.get("https://web-on-tap-be.herokuapp.com/register/")
+        this.setState({
+            registerSuccess: true
+        })
+    }
+
+    handleLogout = () => {
+        this.setState({
+            loginSuccess: false,
+            user: "",
+            logout: true
+        })
+    }
+
+    setLogout = (e) => {
+        this.setState({
+            logout: e
+        })
+    }
+
+    setLoginFailed = (e) => {
+        this.setState({
+            loginFailed: e
+        })
+    }
+
     render(){
         return(
             <CourseContext.Provider value = {{
@@ -258,7 +307,12 @@ class CourseProvider extends React.Component{
                 handleReset: this.handleReset,
                 handleLoadChapter: this.handleLoadChapter,
                 handleLoadLesson: this.handleLoadLesson,
-                handleLoadExam: this.handleLoadExam
+                handleLoadExam: this.handleLoadExam,
+                handleLogin: this.handleLogin,
+                handleRegister: this.handleRegister,
+                handleLogout: this.handleLogout,
+                setLoginFailed: this.setLoginFailed,
+                setLogout: this.setLogout
             }} >
                  {this.props.children}   
             </CourseContext.Provider>
