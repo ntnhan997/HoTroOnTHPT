@@ -9,6 +9,8 @@ import {
   Link
 } from "react-router-dom";
 
+import { Dropdown } from "react-bootstrap";
+
 import Course from './components/Course';
 import Exercise from './components/Exercise';
 
@@ -21,9 +23,13 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import { useContext, useEffect } from 'react';
 import { CourseContext } from './context';
-
+import Home from "./components/Home";
+import avar_test from "./assets/image/test.jpg";
+import { AiOutlineUser, AiFillSetting } from "react-icons/ai";
+import { IoLogOut } from "react-icons/io5";
 
 function App() {
+  const isLogin = false;
   const context = useContext(CourseContext);
   const {loginSuccess, logout, handleLogout, setLogout} = context;
   useEffect(() => {
@@ -49,12 +55,35 @@ function App() {
               <div ><Link to="/dangky" className="btn-register">ĐĂNG KÝ</Link></div>
             </>
           }  
+          <div ><Link to="/khoahoc" className="btn-src">CÁC KHÓA HỌC</Link></div>
+          {
+            isLogin ? 
+              <div style={{display: 'flex'}}>
+                  <img className="avarUser" src={avar_test} alt=""/>
+                  <Dropdown>
+                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu>
+                      <Dropdown.Item href="#/action-1"> <AiOutlineUser /> Hồ sơ</Dropdown.Item>
+                      <Dropdown.Item href="#/action-2"> <AiFillSetting /> Cài đặt</Dropdown.Item>
+                      <Dropdown.Item href="#/action-3"> <IoLogOut /> Thoát</Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+              </div>
+            : <div style={{display: 'flex'}}>
+                <div style={{paddingRight: '30px'}}><Link to="/dangnhap" className="btn-login">ĐĂNG NHẬP</Link></div>
+                <div ><Link to="/dangky" className="btn-register">ĐĂNG KÝ</Link></div>
+              </div>
+          }
         </div>
         <div className="header-right"></div>
       </div>
       
       <Switch>
       <div className="contain">
+        <Route exact path="/" component={Home} />
+
         <Route exact path="/khoahoc/:name/:idChapter/:idLesson" component={Exercise} />
         
         <Route exact path="/khoahoc" component={Course} />
