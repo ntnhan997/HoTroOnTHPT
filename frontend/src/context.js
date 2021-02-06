@@ -254,7 +254,7 @@ class CourseProvider extends React.Component{
     }
 
     handleLogin = async(email, password) => {
-        // const data = await axios.get("https://web-on-tap-be.herokuapp.com/login/")
+        // const data = await axios.get("https://web-on-tap-be.herokuapp.com/users/login")
         if(email === "tanphat@gmail.com" && password === "1234") {
             this.setState({
                 loginSuccess: true,
@@ -271,7 +271,7 @@ class CourseProvider extends React.Component{
   
 
     handleRegister = async(email, password, repeatPassword) => {
-        // const data = await axios.get("https://web-on-tap-be.herokuapp.com/register/")
+        // const data = await axios.get("https://web-on-tap-be.herokuapp.com/user/signup/")
         this.setState({
             registerSuccess: true
         })
