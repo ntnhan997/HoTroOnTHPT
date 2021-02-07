@@ -8,12 +8,12 @@ import { CourseContext } from './context';
 
 export default function PrivateRoute({ component: Component, ...rest }) {
     const context = useContext(CourseContext);
-    const {loginSuccess} = context;
+    const {user} = context;
     return (
       <Route
         {...rest}
         render={props =>
-            loginSuccess ? (
+          user.auth ? (
             <Component {...props} />
           ) : (
             <Redirect
