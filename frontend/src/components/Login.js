@@ -16,20 +16,23 @@ import InfoUser from './InfoUser';
 export default function Login(props){
     const context = useContext(CourseContext);
     const alert = useAlert();
-    const {loginSuccess, loginFailed, handleLogin,setLoginFailed} = context;
+    const {user, isLogin, handleLogin, setStatusLogin} = context;
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const onEmailChange = (e) => {
         setEmail(e.target.value);
     }
-
+    
     useEffect(()=> {
-        if(loginSuccess){
-            props.history.push("/");
-        } else if(loginFailed) {
-            alert.show('Wrong email or password');
-            setLoginFailed(false);
-        } 
+        if(isLogin) {
+            if(user.auth){
+                props.history.push("/khoahoc");
+                setStatusLogin(false);
+            } else if (!user.auth) {
+                alert.show('Wrong email or password');
+                setStatusLogin(false);
+            } 
+        }
     })
 
     const onPasswordChange = (e) => {

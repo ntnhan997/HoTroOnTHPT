@@ -11,7 +11,7 @@ const InfoUser = () => {
         <div className="user-name">
                 <div className="info-username">
                     <div className="info-vip">VIP</div>
-                    <p className="info-user">{ user === "" ? "USER NAME" : user }</p>
+                    <p className="info-user">{ !user.auth ? "USER NAME" : user.email }</p>
                     <p className="info-level">Level: 1</p>
                     <p className="info-avatar">
                         <img src={avatar} alt="img1"/>

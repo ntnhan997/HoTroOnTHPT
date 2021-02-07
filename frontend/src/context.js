@@ -82,11 +82,18 @@ class CourseProvider extends React.Component{
             timer: 20,
             submit: false,
             score: 0,
-            loginSuccess: false,
-            loginFailed: false,
-            registerSuccess: false,
-            logout: false,
-            user: ""
+            user: {
+                auth: false,
+                email: "",
+                username: "",
+                level: 0,
+                point: 0,
+                streak: 0,
+            },
+            isLogin: false,
+            isLogout: false,
+            register: false,
+            isRegister: false
         }
     
     handleTimer = () => {
@@ -254,46 +261,63 @@ class CourseProvider extends React.Component{
     }
 
     handleLogin = async(email, password) => {
-        // const data = await axios.get("https://web-on-tap-be.herokuapp.com/users/login")
-        if(email === "tanphat@gmail.com" && password === "1234") {
-            this.setState({
-                loginSuccess: true,
-                loginFailed: false,
-                user: "tanphat"
-            });
-        } else {
-            this.setState({
-                loginFailed: true
-            });
-        }
+        const json = { email: email, password: password }
+        const data = await axios.post("https://web-on-tap-be.herokuapp.com/users/login", json)
+        this.setState({
+            user: data.data,
+            isLogin: true
+        });
     }
 
   
 
     handleRegister = async(email, password, repeatPassword) => {
-        // const data = await axios.get("https://web-on-tap-be.herokuapp.com/user/signup/")
-        this.setState({
-            registerSuccess: true
-        })
+        if(repeatPassword === password) {
+            const json = { email: email, password: password }
+            const data = await axios.post("https://web-on-tap-be.herokuapp.com/users/signup", json)
+            console.log(data.data);
+            this.setState({
+                register: true,
+                isRegister: true
+            });
+        } else {
+            this.setState({
+                register: false,
+                isRegister: true
+            });
+        }
     }
 
     handleLogout = () => {
         this.setState({
-            loginSuccess: false,
-            user: "",
-            logout: true
+            isLogin: false,
+            isLogout: true,
+            user: {
+                auth: false,
+                email: "",
+                username: "",
+                level: 0,
+                point: 0,
+                streak: 0,
+            }
         })
     }
 
-    setLogout = (e) => {
+    setStatusLogout = (e) => {
         this.setState({
-            logout: e
+            isLogout: e
         })
     }
 
-    setLoginFailed = (e) => {
+    setStatusLogin = (e) => {
         this.setState({
-            loginFailed: e
+            isLogin: e
+        })
+    }
+
+    setStatusRegister = (e) => {
+        this.setState({
+            isRegister: e
         })
     }
 
@@ -311,8 +335,9 @@ class CourseProvider extends React.Component{
                 handleLogin: this.handleLogin,
                 handleRegister: this.handleRegister,
                 handleLogout: this.handleLogout,
-                setLoginFailed: this.setLoginFailed,
-                setLogout: this.setLogout
+                setStatusLogin: this.setStatusLogin,
+                setStatusLogout: this.setStatusLogout,
+                setStatusRegister: this.setStatusRegister
             }} >
                  {this.props.children}   
             </CourseContext.Provider>
