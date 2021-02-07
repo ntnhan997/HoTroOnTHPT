@@ -33,7 +33,7 @@ function App() {
   const context = useContext(CourseContext);
   const {user, isLogout, handleLogout, setStatusLogout} = context;
   useEffect(() => {
-    if(isLogout) {
+    if(isLogout) { 
       window.location.reload(false);
       setStatusLogout(false)
     }
@@ -57,7 +57,7 @@ function App() {
           }   */}
           <div ><Link to="/khoahoc" className="btn-src">CÁC KHÓA HỌC</Link></div>
           {
-            loginSuccess ? 
+            user.auth ? 
               <div style={{display: 'flex'}}>
                   <img className="avarUser" src={avar_test} alt=""/>
                   <Dropdown>

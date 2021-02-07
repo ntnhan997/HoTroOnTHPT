@@ -22,7 +22,7 @@ export default function Login(props){
                 props.history.push("/khoahoc");
                 setStatusLogin(false);
             } else if (!user.auth) {
-                alert.show('Wrong email or password');
+                // alert.show('Wrong email or password');
                 setStatusLogin(false);
             } 
         }
@@ -44,7 +44,7 @@ export default function Login(props){
         <h4 className="login-title">Login</h4>
         <div className="login-form">
         {
-            loginFailed ?
+            !user.auth && isLogin ?
                 <p style={styleErr}>{errorMessage}</p>
             : ''
         }
