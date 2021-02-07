@@ -289,7 +289,7 @@ class CourseProvider extends React.Component{
     }
 
     handleLogout = () => {
-        this.setState({
+     this.setState({
             isLogin: false,
             isLogout: true,
             user: {
@@ -300,7 +300,58 @@ class CourseProvider extends React.Component{
                 point: 0,
                 streak: 0,
             }
-        })
+        }) 
+    }
+    
+    handleValidation = (data) =>{
+        // check empty 
+        if(!data.email || !data.password || !data.repeatPassword) {
+            this.setState({
+                errorMessage: "*Cannot be empty*"
+            });
+            return
+        }
+
+        // check email
+        const pattern = /[a-zA-Z0-9]+[\\.]?([a-zA-Z0-9]+)?[\\@][a-z]{3,9}[\\.][a-z]{2,5}/g;
+        const result = pattern.test(data.email);
+        if (!result) {
+            this.setState({
+                errorMessage: "*Email is not valid*"
+            });
+            return;
+        } else if(data.password || data.repeatPassword) {
+            // check pass
+            if(data.password.length <= 8 || data.password.length >= 20 || data.repeatPassword.length <= 8 || data.repeatPassword.length >= 20) {
+                this.setState({
+                    errorMessage: "*Your password must be between 8-20 characters*"
+                });
+                return;
+            }
+        } else {
+            this.setState({
+                errorMessage: ""
+            });
+            return;
+        } 
+    }
+
+    handleRegister = async(email, password, repeatPassword) => {
+        this.handleValidation({
+            email: email,
+            password: password,
+            repeatPassword: repeatPassword
+        });
+        if(this.errorMessage === "") {
+            const data = await axios.post("https://web-on-tap-be.herokuapp.com/users/signup");
+            this.setState({
+               register: true
+            })
+        } else {
+          this.setState({
+             register: false
+          })
+        }
     }
 
     setStatusLogout = (e) => {

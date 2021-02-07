@@ -104,9 +104,9 @@ const Exercise = (props) => {
                         {
                             BaiTap.questions.map(item => {
                                 return <div key={item.questionId} className={StatusActive(item.questionId) ? "status_question status_active" :  "status_question"}>
-                                    {
+                                   <span className="question_number">{
                                         item.questionId
-                                    }
+                                    }</span>
                                 </div>
                             })
                         }
@@ -118,9 +118,9 @@ const Exercise = (props) => {
                             {
                                 BaiTap.questions.map(item => {
                                     return <div key={item.questionId} className={check(item.questionId) }>
-                                        {
+                                        <span className="question_number">{
                                             item.questionId
-                                        }
+                                        }</span>
                                     </div>
                                 })
                             }
