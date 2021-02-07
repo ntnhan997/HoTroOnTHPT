@@ -12,7 +12,7 @@ import InfoUser from './InfoUser';
 const Register = (props) => {
     const alert = useAlert();
     const context = useContext(CourseContext);
-    const {register, handleRegister, isRegister, setStatusRegister, registerSuccess, errorMessage} = context;
+    const {register, handleRegister, isRegister, setStatusRegister, errorMessage} = context;
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [repeatPassword, setPasswordAgain] = useState("");
@@ -34,7 +34,7 @@ const Register = (props) => {
             if(register) {
                 props.history.push("/dangnhap");
             } else {
-                alert.show("Signup failed");
+                //alert.show("Signup failed");
             }
             setStatusRegister(false);
         }
@@ -49,28 +49,28 @@ const Register = (props) => {
     return (
     <>
         <div className="login-box">
-            <h4 className="login-title">Register</h4>
+            <h4 className="login-title">Đăng Kí</h4>
             {
-                !!errorMessage ?
+                isRegister && !register ?
                     <p style={styleErr}>{errorMessage}</p>
                 : ''
             }
             <div className="login-form">
-                    <label htmlFor="basic-url">Email address*</label>
+                    <label htmlFor="basic-url">Email*</label>
                     <InputGroup className="mb-3">
-                        <FormControl aria-describedby="basic-addon1" placeholder="Enter email address" onChange={onEmailChange}/>
+                        <FormControl aria-describedby="basic-addon1" placeholder="Nhập email" onChange={onEmailChange}/>
                     </InputGroup>
 
-                    <label htmlFor="basic-url">Create password*</label>
+                    <label htmlFor="basic-url">Mật Khẩu*</label>
                     <InputGroup className="mb-3">
-                        <FormControl aria-describedby="basic-addon1" placeholder="Enter password" onChange={onPasswordChange}/>
+                        <FormControl aria-describedby="basic-addon1" type="password" placeholder="Nhập mật khẩu" onChange={onPasswordChange}/>
                     </InputGroup>
 
-                    <label htmlFor="basic-url">Repeat password*</label>
+                    <label htmlFor="basic-url">Nhập lại mật khẩu*</label>
                     <InputGroup className="mb-3">
-                        <FormControl aria-describedby="basic-addon1" placeholder="Enter password" onChange={onPasswordChangeAgain}/>
+                        <FormControl aria-describedby="basic-addon1" type="password" placeholder="Nhập lại mật khẩu" onChange={onPasswordChangeAgain}/>
                     </InputGroup>
-                    <Button className="btn-login-2" variant="success" onClick={() => handleRegister(email, password, repeatPassword)}>Register Account</Button>
+                    <Button className="btn-login-2" variant="success" onClick={() => handleRegister(email, password, repeatPassword)}>Đăng kí tài khoản</Button>
             </div>
         </div>
     </>

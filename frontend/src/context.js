@@ -93,7 +93,8 @@ class CourseProvider extends React.Component{
             isLogin: false,
             isLogout: false,
             register: false,
-            isRegister: false
+            isRegister: false,
+            errorMessage: ""
         }
     
     handleTimer = () => {
@@ -283,7 +284,8 @@ class CourseProvider extends React.Component{
         } else {
             this.setState({
                 register: false,
-                isRegister: true
+                isRegister: true,
+                errorMessage: "*Signup failed*"
             });
         }
     }
@@ -336,23 +338,27 @@ class CourseProvider extends React.Component{
         } 
     }
 
-    handleRegister = async(email, password, repeatPassword) => {
-        this.handleValidation({
-            email: email,
-            password: password,
-            repeatPassword: repeatPassword
-        });
-        if(this.errorMessage === "") {
-            const data = await axios.post("https://web-on-tap-be.herokuapp.com/users/signup");
-            this.setState({
-               register: true
-            })
-        } else {
-          this.setState({
-             register: false
-          })
-        }
-    }
+    // handleRegister = async(email, password, repeatPassword) => {
+    //     this.handleValidation({
+    //         email: email,
+    //         password: password,
+    //         repeatPassword: repeatPassword
+    //     });
+    //     console.log(email + password + this.state.errorMessage);
+    //     if(this.state.errorMessage === "") {
+    //         const json = { email: email, password: password}
+    //         await axios.post("https://web-on-tap-be.herokuapp.com/users/signup", json);
+    //         this.setState({
+    //            register: true,
+    //            isRegister: true
+    //         })
+    //     } else {
+    //       this.setState({
+    //          register: false,
+    //          isRegister: true
+    //       })
+    //     }
+    // }
 
     setStatusLogout = (e) => {
         this.setState({

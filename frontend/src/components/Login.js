@@ -55,7 +55,7 @@ export default function Login(props){
 
                 <label htmlFor="basic-url">Password*</label>
                 <InputGroup className="mb-3">
-                    <FormControl aria-describedby="basic-addon1" placeholder="Enter password" onChange={onPasswordChange}/>
+                    <FormControl aria-describedby="basic-addon1" type="password" placeholder="Enter password" onChange={onPasswordChange}/>
                 </InputGroup>
                 <Button className="btn-login-2" variant="success" onClick = {() => handleLogin(email,password)}>Login</Button>
             </div>
