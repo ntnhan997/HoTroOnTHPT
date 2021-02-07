@@ -1,13 +1,18 @@
 /* eslint-disable no-unused-vars */
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { CourseContext } from '../context';
 
 import { InputGroup, FormControl, Button, InputGroupAddon, InputGroupText, Input } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useAlert } from 'react-alert'
+
+import InfoUser from './InfoUser';
+
 
 const Register = (props) => {
+    const alert = useAlert();
     const context = useContext(CourseContext);
-    const {registerSuccess, handleRegister, errorMessage} = context;
+    const {register, handleRegister, isRegister, setStatusRegister, registerSuccess, errorMessage} = context;
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [repeatPassword, setPasswordAgain] = useState("");
@@ -23,10 +28,23 @@ const Register = (props) => {
         setPasswordAgain(e.target.value);
     }
 
-    const styleErr = {
+
+    useEffect(() => {
+        if(isRegister) {
+            if(register) {
+                props.history.push("/dangnhap");
+            } else {
+                alert.show("Signup failed");
+            }
+            setStatusRegister(false);
+        }
+    })
+  
+  const styleErr = {
         color: "red",
         textAlign: "center"
     }
+
 
     return (
     <>

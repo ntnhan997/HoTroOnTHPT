@@ -21,7 +21,7 @@ const ListChapter = (props) => {
         <InfoUser />
         <div className="course">
             <div className="box-course">
-                <h4 className="hello-user-chapter">Xin chào, { user === "" ? "USER NAME" : user }</h4>
+                <h4 className="hello-user-chapter">Xin chào, { !user.auth ? "USER NAME" : user.email }</h4>
                 <Link to="/khoahoc/"><span className="btn-back">Quay lại</span></Link>
                 <div className="subject-contain">
                     <h4>Môn Toán</h4>

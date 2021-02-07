@@ -82,11 +82,18 @@ class CourseProvider extends React.Component{
             timer: 20,
             submit: false,
             score: 0,
-            loginSuccess: false,
-            loginFailed: false,
-            registerSuccess: false,
-            logout: false,
-            user: ""
+            user: {
+                auth: false,
+                email: "",
+                username: "",
+                level: 0,
+                point: 0,
+                streak: 0,
+            },
+            isLogin: false,
+            isLogout: false,
+            register: false,
+            isRegister: false
         }
     
     handleTimer = () => {
@@ -254,20 +261,48 @@ class CourseProvider extends React.Component{
     }
 
     handleLogin = async(email, password) => {
-        // const data = await axios.get("https://web-on-tap-be.herokuapp.com/users/login")
-        if(email === "tanphat@gmail.com" && password === "1234") {
+        const json = { email: email, password: password }
+        const data = await axios.post("https://web-on-tap-be.herokuapp.com/users/login", json)
+        this.setState({
+            user: data.data,
+            isLogin: true
+        });
+    }
+
+  
+
+    handleRegister = async(email, password, repeatPassword) => {
+        if(repeatPassword === password) {
+            const json = { email: email, password: password }
+            const data = await axios.post("https://web-on-tap-be.herokuapp.com/users/signup", json)
+            console.log(data.data);
             this.setState({
-                loginSuccess: true,
-                loginFailed: false,
-                user: "tanphat"
+                register: true,
+                isRegister: true
             });
         } else {
             this.setState({
-                loginFailed: true
+                register: false,
+                isRegister: true
             });
         }
     }
 
+    handleLogout = () => {
+     this.setState({
+            isLogin: false,
+            isLogout: true,
+            user: {
+                auth: false,
+                email: "",
+                username: "",
+                level: 0,
+                point: 0,
+                streak: 0,
+            }
+        }) 
+    }
+    
     handleValidation = (data) =>{
         // check empty 
         if(!data.email || !data.password || !data.repeatPassword) {
@@ -307,29 +342,33 @@ class CourseProvider extends React.Component{
             password: password,
             repeatPassword: repeatPassword
         });
-        // const data = await axios.get("https://web-on-tap-be.herokuapp.com/user/signup/")
+        if(this.errorMessage === "") {
+            const data = await axios.post("https://web-on-tap-be.herokuapp.com/users/signup");
+            this.setState({
+               register: true
+            })
+        } else {
+          this.setState({
+             register: false
+          })
+        }
+    }
+
+    setStatusLogout = (e) => {
         this.setState({
-            registerSuccess: true
+            isLogout: e
         })
     }
 
-    handleLogout = () => {
+    setStatusLogin = (e) => {
         this.setState({
-            loginSuccess: false,
-            user: "",
-            logout: true
+            isLogin: e
         })
     }
 
-    setLogout = (e) => {
+    setStatusRegister = (e) => {
         this.setState({
-            logout: e
-        })
-    }
-
-    setLoginFailed = (e) => {
-        this.setState({
-            loginFailed: e
+            isRegister: e
         })
     }
 
@@ -347,8 +386,9 @@ class CourseProvider extends React.Component{
                 handleLogin: this.handleLogin,
                 handleRegister: this.handleRegister,
                 handleLogout: this.handleLogout,
-                setLoginFailed: this.setLoginFailed,
-                setLogout: this.setLogout
+                setStatusLogin: this.setStatusLogin,
+                setStatusLogout: this.setStatusLogout,
+                setStatusRegister: this.setStatusRegister
             }} >
                  {this.props.children}   
             </CourseContext.Provider>
