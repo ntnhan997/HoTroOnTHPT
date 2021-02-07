@@ -41,23 +41,23 @@ export default function Login(props){
     return (
     <>
        <div className="login-box">
-        <h4 className="login-title">Login</h4>
+        <h4 className="login-title">Đăng nhập</h4>
         <div className="login-form">
         {
             !user.auth && isLogin ?
                 <p style={styleErr}>{errorMessage}</p>
             : ''
         }
-                <label htmlFor="basic-url">Email address*</label>
+                <label htmlFor="basic-url">Email*</label>
                 <InputGroup className="mb-3">
-                    <FormControl aria-describedby="basic-addon1" placeholder="Enter email address" onChange={onEmailChange}/>
+                    <FormControl aria-describedby="basic-addon1" placeholder="Nhập Email" onChange={onEmailChange}/>
                 </InputGroup>
 
-                <label htmlFor="basic-url">Password*</label>
+                <label htmlFor="basic-url">Mật khẩu*</label>
                 <InputGroup className="mb-3">
-                    <FormControl aria-describedby="basic-addon1" type="password" placeholder="Enter password" onChange={onPasswordChange}/>
+                    <FormControl aria-describedby="basic-addon1" type="password" placeholder="Nhập mật khẩu" onChange={onPasswordChange}/>
                 </InputGroup>
-                <Button className="btn-login-2" variant="success" onClick = {() => handleLogin(email,password)}>Login</Button>
+                <Button className="btn-login-2" variant="success" onClick = {() => handleLogin(email,password)}>Đăng Nhập</Button>
             </div>
         </div>
     </>

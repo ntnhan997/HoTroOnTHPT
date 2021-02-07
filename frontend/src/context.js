@@ -5,6 +5,7 @@ import axios from 'axios';
 
 
 const CourseContext = React.createContext();
+const API_ENDPOINT = "https://web-on-tap-be.herokuapp.com";
 
 class CourseProvider extends React.Component{
        state = {
@@ -185,7 +186,7 @@ class CourseProvider extends React.Component{
         this.setState({
             status: [],
             submit: false, 
-            timer: 20,
+            timer: 300,
             score: 0,
         })
         po();
@@ -219,18 +220,17 @@ class CourseProvider extends React.Component{
     }
 
     handleLoadLesson = async(name) => {
-        const data = await axios.get("https://web-on-tap.herokuapp.com/lesson/chapter/" + name);
+        const data = await axios.get(API_ENDPOINT + "/lesson/chapter/" + name);
         this.setState({
             listchapter: data.data
         });
     }
 
     handleLoadChapter = async(id) => {
-        const data = await axios.get("https://web-on-tap.herokuapp.com/lesson/"+ id);
+        const data = await axios.get(API_ENDPOINT + "/lesson/"+ id);
         this.setState({
-            chapter: data.data[0]
+            chapter: data.data
         })
-        console.log(data.data[0]);
     }
 
 
@@ -240,7 +240,7 @@ class CourseProvider extends React.Component{
                 questions: []
             }
         })
-        const data = await axios.get("https://web-on-tap.herokuapp.com/exam/1");
+        const data = await axios.get(API_ENDPOINT + "/exam/" + id);
         const datas = data.data;
         for(let index of datas){
             const answers = [index.answer1, index.answer2, index.answer3, index.answer4];
@@ -263,7 +263,7 @@ class CourseProvider extends React.Component{
 
     handleLogin = async(email, password) => {
         const json = { email: email, password: password }
-        const data = await axios.post("https://web-on-tap-be.herokuapp.com/users/login", json)
+        const data = await axios.post(API_ENDPOINT + "/users/login", json)
         this.setState({
             user: data.data,
             isLogin: true
@@ -275,8 +275,7 @@ class CourseProvider extends React.Component{
     handleRegister = async(email, password, repeatPassword) => {
         if(repeatPassword === password) {
             const json = { email: email, password: password }
-            const data = await axios.post("https://web-on-tap-be.herokuapp.com/users/signup", json)
-            console.log(data.data);
+            const data = await axios.post(API_ENDPOINT + "/users/signup", json)
             this.setState({
                 register: true,
                 isRegister: true
@@ -338,27 +337,7 @@ class CourseProvider extends React.Component{
         } 
     }
 
-    // handleRegister = async(email, password, repeatPassword) => {
-    //     this.handleValidation({
-    //         email: email,
-    //         password: password,
-    //         repeatPassword: repeatPassword
-    //     });
-    //     console.log(email + password + this.state.errorMessage);
-    //     if(this.state.errorMessage === "") {
-    //         const json = { email: email, password: password}
-    //         await axios.post("https://web-on-tap-be.herokuapp.com/users/signup", json);
-    //         this.setState({
-    //            register: true,
-    //            isRegister: true
-    //         })
-    //     } else {
-    //       this.setState({
-    //          register: false,
-    //          isRegister: true
-    //       })
-    //     }
-    // }
+
 
     setStatusLogout = (e) => {
         this.setState({
