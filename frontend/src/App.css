@@ -562,10 +562,17 @@ a {
     color: red !important;
 }
 
-.subject {
+.avarUser {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+/* .subject {
     width: 140px;
     height: 160px;
-}
+} */
 
 .cover-subject>img {
     width: 140px;
@@ -692,7 +699,7 @@ a {
     line-height: 16px;
     color: #959090;
     float: right;
-    margin-top: 20px;
+    margin-top: 2px;
 }
 
 .hello-user-chapter {
@@ -758,11 +765,95 @@ a {
     position: absolute;
     border: 8px solid #f3f3f3;
     border-radius: 50%;
-    border-top: 8px solid #3498db;
+    border-top: 8px solid #14945f;
     width: 50px;
     height: 50px;
     -webkit-animation: spin 2s linear infinite;
     animation: spin 2s linear infinite;
+  }
+
+  .dropdown .btn {
+    padding: .2rem .6rem;
+  }
+
+  /* dots */
+  .pindicator {
+    background-color: white;
+    display: flex;
+    margin: 2rem auto 2rem;
+    width: 30rem;
+  }
+  .pindicator .bullet {
+    flex: 1;
+    position: relative;
+    text-align: center;
+    transform-style: preserve-3d;
+  }
+  .pindicator .bullet::before,
+  .pindicator .bullet::after {
+    content: '';
+    display: block;
+    position: absolute;
+    height: .2rem;
+    top: 0.8rem;
+    transform: translate3d(0,0,-1px);
+  }
+  .pindicator .bullet::before {
+    background-color: lightgray;
+    width: 100%;
+  }
+  .pindicator .bullet::after {
+    background-color:#14945f;
+    transition: opacity .25s ease-out;
+    opacity: 0;
+    width: 100%;
+  }
+  
+  .pindicator .bullet:first-child::before,
+  .pindicator .bullet:first-child::after {
+    left: 50%;
+    width: 50%;
+  }
+  .pindicator .bullet:last-child::before,
+  .pindicator .bullet:last-child::after {
+    width: 50%;
+  }
+  
+  .pindicator .icon {
+    background-color: lightgray;
+    border-radius: 100%;
+    color: transparent;
+    cursor: pointer;
+    font-size: 0.8rem;
+    display: inline-block;
+    height: 2em;
+    line-height: 2;
+    text-align: center;
+    transition: background-color .25s ease-out;
+    width: 2em;
+  }
+  .pindicator .text {
+    color: lightgray;
+    font-size: .75rem;
+    margin-top: 1rem;
+    text-transform: uppercase;
+    transition: background-color .25s ease-out;
+  }
+  .pindicator .past .icon,
+  .pindicator .current .icon {
+    background-color: #14945f;
+    color: white;
+  }
+  
+  .pindicator .past::after,  
+  .pindicator .current::after {
+    opacity: 1;
+  }
+  
+  .pindicator .past .text,
+  .pindicator .current .text,
+  .pindicator .next .text {
+    color: #14945f;
   }
   
   @-webkit-keyframes spin {
