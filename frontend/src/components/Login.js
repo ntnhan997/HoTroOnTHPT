@@ -14,7 +14,7 @@ export default function Login(props){
     const onEmailChange = (e) => {
         setEmail(e.target.value);
     }
-    const errorMessage = '*Wrong email or password*';
+    const errorMessage = '*Password or email is incorrect*';
     useEffect(()=> {
         if(loginSuccess){
             props.history.push("/");
